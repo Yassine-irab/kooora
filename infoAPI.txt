@@ -1,0 +1,11 @@
+https://www.football-data.org/
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+- Name           :	yassine
+- E-Mail         :	yassineirab.contact@gmail.com
+- Subscription   :  Free
+- API token      :	2ab1362f12444b09afcb41bbc4e82204
+- Total requests :	0 (counter is asynchronous and thus delayed)
+
+sportmonks
+▬▬▬▬▬▬▬▬▬▬
+- Api token: wWQf8fqu4MMIFc8OXNcPHwe0uf7rsM4Smte6YY9nI59vDtrwtur4bbzI7G6d
