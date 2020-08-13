@@ -3,11 +3,11 @@
 include 'config.php';
 include 'functions.php';
 
-$url = "http://livescore-api.com/api-client/scores/live.json?key=".KEY."&secret=".SECRET."&lang=ar";
+$url = "https://api.footystats.org/league-matches?key=".authToken."&league_id=1625";
 $json = file_get_contents($url);
 $data = json_decode($json, true);
 
-/*var_dump($data['data']['match']);*/
+var_dump($data['data']);
 
 if (isset($_POST["change_timezone"])) {
     $timezone = $_POST['change_timezone'];
@@ -20,16 +20,6 @@ $In_play = "IN PLAY";
 $Half_timebreak = "HALF TIME BREAK";
 $Finished = "FINISHED";
 $AddedTime = "ADDED TIME";
-
-$yesterday = date('Y-m-d',strtotime("-1 days"));
-$urlYesterday = "http://livescore-api.com/api-client/scores/history.json?key=dPfffBC9NHq1VlMv&secret=KGBuHyTf2XIpW3laSAp8b1hZJH0E2M9N&from=".$yesterday."&to=".$yesterday."&lang=ar";
-$jsonYesterday = file_get_contents($urlYesterday);
-$dataYesterday = json_decode($jsonYesterday, true);
-
-$tommorow = date('Y-m-d',strtotime("+1 days"));
-$urlTommorow = "http://livescore-api.com/api-client/scores/history.json?key=dPfffBC9NHq1VlMv&secret=KGBuHyTf2XIpW3laSAp8b1hZJH0E2M9N&from=".$tommorow."&to=".$tommorow."&lang=ar";
-$jsonTommorow = file_get_contents($urlTommorow);
-$dataTommorow = json_decode($jsonTommorow, true);
 
 ?>
 
@@ -62,7 +52,7 @@ $dataTommorow = json_decode($jsonTommorow, true);
                                 <a href="./">الرئيسية</a>
                             </li>
                             <li>
-                                <a href="./listcompetition.php">ترتيب الفرق والهدافين</a>
+                                <a href="#">ترتيب الفرق والهدافين</a>
                             </li>
                             <li>
                                 <a href="#">مباريات قادمة</a>

@@ -2,13 +2,12 @@
 
 include 'config.php';
 
-$match_id = $_GET['match_id'];
+$league_id = $_GET['league_id'];
 
-$url = "https://livescore-api.com/api-client/matches/stats.json?match_id=".$match_id."&key=".KEY."&secret=".SECRET."&lang=ar";
+$url = "http://livescore-api.com/api-client/leagues/table.json?key=".KEY."&secret=".SECRET."&lang=ar&competition_id=".$league_id;
 $json = file_get_contents($url);
 $data = json_decode($json, true);
-
-/*var_dump($data['data']);*/
+var_dump($data['data']);
 ?>
 
 <html dir="rtl" lang="ar" style="transform: none;">
@@ -20,18 +19,6 @@ $data = json_decode($json, true);
     </head>
     <body style="transform: none;">
         <header id="header-wrapper">
-            <!--<div id="headercontent">
-                <div class="container">
-                    <div class="menu_icon_cont">
-                        <img src="https://www.kooora4live.tv/wp-content/themes/alba-kora4live-v2/img/ic_menu_black_24px.svg" alt="menu">
-                    </div>
-                    <div id="kora-logo">
-                        <a href="#" class="logo-img" title="">
-                            <img src="images/logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>-->
             <div class="kora-top-nav">
                 <div class="container">
                     <div class="main-menu">
@@ -40,7 +27,7 @@ $data = json_decode($json, true);
                                 <a href="./">الرئيسية</a>
                             </li>
                             <li>
-                                <a href="./listcompetition.php">ترتيب الفرق والهدافين</a>
+                                <a href="#">ترتيب الفرق والهدافين</a>
                             </li>
                             <li>
                                 <a href="#">مباريات قادمة</a>
@@ -104,93 +91,13 @@ $data = json_decode($json, true);
                     style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;">
                     <div class="alba-live-table box">
                         <div class="box-title">
-                            <h2 class="title">يلا شوت</h2>
-                        </div>
-                        <div class="tab filter-days">
-                            <a id="" class="tablinks yesterday" href="#yesterday">تشكيلة</a>
-                            <a id="" class="tablinks today active" href="#today">إحصائية</a>
-                            <a id="" class="tablinks tommorw" href="#tommorw">أخبار</a>
-                        </div>                        
+                            <h2 class="title">ترتيب البطولات</h2>
+                        </div>                      
                         <div class="contents widget-content" id="content">
                         <div id="today" class="tabcontent">
-                        <?php if(sizeof($data['data']) === 0){ ?>
-                            <div>
-                                <p>لايوجد بيانات</p>
-                            </div>                            
-                        <?php }else{ ?>
-                        <table>
-                                <tr>
-                                    <td><?=substr($data['data']['yellow_cards'], 0, 1)?></td>
-                                    <td class="titleStatic">البطاقات الصفراء</td>
-                                    <td><?=substr($data['data']['yellow_cards'], -1)?></td>
-                                </tr>
-                                <tr>
-                                    <td><?=substr($data['data']['red_cards'], 0, 1)?></td>
-                                    <td class="titleStatic">البطاقات الحمراء</td>
-                                    <td><?=substr($data['data']['red_cards'], -1)?></td>
-                                </tr>
-                                <tr>
-                                    <td><?=substr($data['data']['possesion'], 0, 2)?>%</td>
-                                    <td class="titleStatic">استحواذ</td>
-                                    <td><?=substr($data['data']['possesion'], -2)?>%</td>
-                                </tr>
-                                <tr>
-                                    <td><?=substr($data['data']['free_kicks'], 0, 2)?></td>
-                                    <td class="titleStatic">الركلات الحرة</td>
-                                    <td><?=substr($data['data']['free_kicks'], -2)?></td>
-                                </tr>
-                                <tr>
-                                    <td><?=substr($data['data']['goal_kicks'], 0, 2)?></td>
-                                    <td class="titleStatic">ضربات المرمى</td>
-                                    <td><?=substr($data['data']['goal_kicks'], -2)?></td>
-                                </tr> 
-                                <tr>
-                                    <td><?=substr($data['data']['offsides'], 0, 1)?></td>
-                                    <td class="titleStatic">تسلل</td>
-                                    <td><?=substr($data['data']['offsides'], -1)?></td>
-                                </tr>     
-                                <tr>
-                                    <td><?=substr($data['data']['corners'], 0, 1)?></td>
-                                    <td class="titleStatic">ضربات جانبية</td>
-                                    <td><?=substr($data['data']['corners'], -1)?></td>
-                                </tr> 
-                                <tr>
-                                    <td><?=substr($data['data']['shots_on_target'], 0, 1)?></td>
-                                    <td class="titleStatic">التسديدات على المرمى</td>
-                                    <td><?=substr($data['data']['shots_on_target'], -1)?></td>
-                                </tr> 
-                                <tr>
-                                    <td><?=substr($data['data']['shots_off_target'], 0, 1)?></td>
-                                    <td class="titleStatic">التسديدات خارج المرمى</td>
-                                    <td><?=substr($data['data']['shots_off_target'], -1)?></td>
-                                </tr>
-                                <tr>
-                                    <td><?=substr($data['data']['saves'], 0, 1)?></td>
-                                    <td class="titleStatic">تصديات حارس المرمى</td>
-                                    <td><?=substr($data['data']['saves'], -1)?></td>
-                                </tr>  
-                                <tr>
-                                    <td><?=substr($data['data']['treatments'], 0, 1)?></td>
-                                    <td class="titleStatic">الإصابات</td>
-                                    <td><?=substr($data['data']['treatments'], -1)?></td>
-                                </tr> 
-                                <tr>
-                                    <td><?=substr($data['data']['fauls'], 0, 2)?></td>
-                                    <td class="titleStatic">عدد الاخطاء</td>
-                                    <td><?=substr($data['data']['fauls'], -2)?></td>
-                                </tr> 
-                                <tr>
-                                    <td><?=substr($data['data']['penalties'], 0, 1)?></td>
-                                    <td class="titleStatic">ضربات الجزاء</td>
-                                    <td><?=substr($data['data']['penalties'], -1)?></td>
-                                </tr> 
-                                <tr>
-                                    <td><?=substr($data['data']['attacks'], 0, 2)?></td>
-                                    <td class="titleStatic">عمليات الهجوم</td>
-                                    <td><?=substr($data['data']['attacks'], -2)?></td>
-                                </tr>                                                                                                                                                                                                                                                                                                                            
-                            </table>
-                        <?php } ?>
+                            <div class="containCompetitions">
+
+                            </div>                                
                         </div>                                                        
                         </div>
                     </div>
